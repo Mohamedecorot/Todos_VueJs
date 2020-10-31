@@ -6,13 +6,17 @@
         </header>
         <div class="main">
             <ul class="todo-list">
-                <li class="todo" v-for="todo in todos">
+                <li class="todo" v-for="todo in todos" :class="{completed: todo.completed}">
                     <div class="view">
+                        <input type="checkbox" v-model="todo.completed" class="toggle">
                         <label>{{ todo.name }}</label>
                     </div>
                 </li>
             </ul>
         </div>
+        <footer class="footer">
+            <span class="todo-count"><strong>{{ remaining }}</strong> tâches à faire</span>
+        </footer>
     </section>
 </template>
 
@@ -35,8 +39,12 @@ export default {
             })
             this.newTodo = ''
         }
+    },
+    computed: {
+        remaining () {
+            return this.todos.filter(todo => !todo.completed).length
+        }
     }
-    
 }
 </script>
 <style src="./todos.css"></style>
