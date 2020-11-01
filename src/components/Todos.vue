@@ -17,13 +17,14 @@
                 </li>
             </ul>
         </div>
-        <footer class="footer">
+        <footer class="footer" v-show="hasTodos">
             <span class="todo-count"><strong>{{ remaining }}</strong> tâches à faire</span>
             <ul class="filters">
                 <li><a href="#" :class="{selected: filter === 'all'}" @click.prevent="filter='all'">Toutes</a></li>
                 <li><a href="#" :class="{selected: filter === 'todo'}" @click.prevent="filter='todo'">A faire</a></li>
                 <li><a href="#" :class="{selected: filter === 'done'}" @click.prevent="filter='done'">Faites</a></li>
             </ul>
+            <button class="clear-complete" v-show="completed" @click.prevent="deleteCompleted">Supprimer</button>
         </footer>
     </section>
 </template>
@@ -50,7 +51,10 @@ export default {
         },
         deleteTodo (todo) {
             this.todos = this.todos.filter(i => i !== todo)
-        }
+        },
+        deleteCompleted () {
+            this.todos = this.todos.filter(todo => !todo.completed)
+        },
     },
     computed: {
         allDone: {
@@ -63,8 +67,10 @@ export default {
                 })
             }
         },
-        remaining () {
-            return this.todos.filter(todo => !todo.completed).length
+        remaining () { return this.todos.filter(todo => !todo.completed).length },
+        completed () { return this.todos.filter(todo => todo.completed).length },
+        hasTodos () {
+            return this.todos.length > 0
         },
         filteredTodos () {
             if(this.filter === 'todo') {
