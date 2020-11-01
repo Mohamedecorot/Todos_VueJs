@@ -1,14 +1,21 @@
 <template>
   <div>
-    {{ todos }}
+    <carousel>
+      <carousel-slide>
+        salut les gens
+      </carousel-slide>
+      <carousel-slide>
+        Aurevoir les gens
+      </carousel-slide>
+    </carousel>
     <todos v-model="todos"></todos>
-    <todos v-model="todos"></todos>
-    <button @click="addTodo">Ajouter une tâche</button>
   </div>
 </template>
 
 <script>
 import Todos from './components/Todos'
+import Carousel from './components/carousel/Carousel'
+import CarouselSlide from './components/carousel/CarouselSlide'
 export default {
   data() {
     return {
@@ -27,7 +34,9 @@ export default {
     }
   },
   components: {
-    Todos
+    Todos,
+    Carousel,
+    CarouselSlide
   }
 }
 </script>
