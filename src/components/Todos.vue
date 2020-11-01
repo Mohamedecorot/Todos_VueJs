@@ -33,16 +33,21 @@
 <script>
 import Vue from 'vue'
 export default {
+    props: {
+        value: {type: Array, default () { return [] }}
+    },
     data () {
         return {
-            todos: [{
-                name: 'Tache de test',
-                completed: false
-            }],
+            todos: this.value,
             newTodo: '',
             filter: 'all',
             editing: null,
             oldTodo: ''
+        }
+    },
+    watch: {
+        value (value) {
+            this.todos = value
         }
     },
     methods: {
@@ -58,6 +63,7 @@ export default {
         },
         deleteCompleted () {
             this.todos = this.todos.filter(todo => !todo.completed)
+            this.$emit('input', this.todos)
         },
         editTodo (todo) {
             this.editing= todo,
