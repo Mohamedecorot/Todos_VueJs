@@ -11,7 +11,8 @@ export default {
     data () {
         return {
             index: 0,
-            slides: []
+            slides: [],
+            direction: null
         }
     },
     mounted () {
@@ -26,12 +27,14 @@ export default {
     methods: {
         next () {
             this.index++
+            this.direction = 'right'
             if (this.index >= this.slideCount) {
                 this.index = 0
             }
         },        
         prev () {
             this.index--
+            this.direction = 'left'
             if (this.index < 0 ) {
                 this.index = this.slideCount - 1
             }
