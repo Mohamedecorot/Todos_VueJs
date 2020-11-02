@@ -1,8 +1,10 @@
 <template>
-    <div v-show="visible">
-        Index: {{ index }}
+    <transition name="slide">
+        <div v-show="visible">
+            Index: {{ index }}
         <slot></slot>
     </div>
+    </transition>
 </template>
 
 <script>
@@ -19,3 +21,29 @@ export default {
     }
 }
 </script>
+
+<style>
+    .slide-enter-active{
+        animation: slideIn 5s;
+    }
+
+    .slide-leave-active{
+        animation: slideOut 5s;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+    }
+
+    @keyframes slideIn {
+        from { transform: translateX(100%); }
+        to { transform: translateX(0); }
+    }
+
+    @keyframes slideOut {
+        from { transform: translateX(0); }
+        to { transform: translateX(-100%); }
+    }
+</style>
