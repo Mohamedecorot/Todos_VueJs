@@ -1,15 +1,12 @@
 <template>
   <div>
     <carousel class="carousel">
-      <carousel-slide>
-        <div style="position:absolute; left:0; right:0; text-align:center; top:50%; color: #FFF; font-size:16px">salut les gens</div>
-        <img src="https://picsum.photos/630/300" width="100%">
-      </carousel-slide>
-      <carousel-slide>
-        <div style="position:absolute; left:0; right:0; text-align:center; top:50%; color: #FFF; font-size:16px">Aurevoir les gens</div>
-        <img src="https://picsum.photos/630/300" width="100%">
+      <carousel-slide v-for="n in slides" :index="n - 1">
+        <div style="position:absolute; left:0; right:0; text-align:center; top:50%; color: #FFF; font-size:16px">Slide {{ n }}</div>
+        <img :src="'http://placeimg.com/630/300/' + n " width="100%" height="50%">
       </carousel-slide>
     </carousel>
+    <button @click="addSlide">Ajouter un slide</button>
     <todos v-model="todos"></todos>
   </div>
 </template>
@@ -21,6 +18,7 @@ import CarouselSlide from './components/carousel/CarouselSlide'
 export default {
   data() {
     return {
+      slides: 5,
       todos: [{
         name: 'Demo',
         completed: true
@@ -33,6 +31,9 @@ export default {
         name: 'Mohamed',
         completed: false
       })
+    },
+    addSlide () {
+      this.slides++
     }
   },
   components: {
@@ -47,6 +48,7 @@ export default {
   .carousel {
     position: relative;
     text-align: center;
+    overflow: hidden;
   }
 
   .carousel__nav {
@@ -66,4 +68,25 @@ export default {
 
   }
 
+  .carousel__pagination {
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    right: 0;
+    text-align: center;
+  }
+
+  .carousel__pagination button {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background-color: #000;
+    opacity: 0.8;
+    border-radius: 10px;
+    margin: 0.2px;
+  }
+
+  .carousel__pagination button {
+    background-color: #fff;
+  }
 </style>
