@@ -18,6 +18,13 @@ export default {
             direction: 'right'
         }
     },
+    watch: {
+        slides (slides) {
+            if (this.index >= this.slideCount) {
+                this.index = this.slideCount - 1
+            }
+        }
+    },
     computed: {
         slideCount () { return this.slides.length }
     },

@@ -7,6 +7,7 @@
       </carousel-slide>
     </carousel>
     <button @click="addSlide">Ajouter un slide</button>
+    <button @click="removeSlide">Supprimer un slide</button>
     <todos v-model="todos"></todos>
   </div>
 </template>
@@ -34,6 +35,9 @@ export default {
     },
     addSlide () {
       this.slides++
+    },    
+    removeSlide () {
+      this.slides--
     }
   },
   components: {
