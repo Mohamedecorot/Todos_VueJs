@@ -90,7 +90,7 @@ export default {
     margin: 0.2px;
   }
 
-  .carousel__pagination button {
+  .carousel__pagination button.active{
     background-color: #fff;
   }
 </style>
